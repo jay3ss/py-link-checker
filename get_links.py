@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import requests
 
 from helpers import *
+from scraper import *
 
 # This is a hack so that we can kill the process b/c SIGINT isn't working...
 print(f'PID is {os.getpid()}')
