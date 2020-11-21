@@ -32,7 +32,28 @@ def resolves(link):
         return False
 
 
-def verify_links(links, base, callback=None):
+def verify_links(links, base, callback=None, sleep=0.1):
+    """Verifies that the given links are able to be resolved
+
+    Args:
+        links:
+            list of links to be verified. Doesn't need to have unique elements,
+            this will be taken care of
+        base:
+            Base URL of site (essentially the starting URL) used for relative
+            links
+        callback:
+            Callback function
+        sleep:
+            Amount of time to sleep between verifying links
+
+    Returns:
+        Dictionary of links:
+            working:
+                list of links that resolve
+            not_working:
+                list of links that don't resolve
+    """
     full_links = get_full_links(links, base)
     good_links = []
     bad_links = []
@@ -44,6 +65,6 @@ def verify_links(links, base, callback=None):
         print_same_line(f'Verifying link {link}: {num+1}/{len(full_links)}')
         good_links.append(link) if resolves(link) else bad_links.append(link)
 
-        # time.sleep(0.075)
+        time.sleep(sleep)
 
     return {'working': good_links, 'not_working': bad_links}
